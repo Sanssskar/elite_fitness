@@ -7,9 +7,9 @@
 
 <header id="siteHeader"
         data-transparent-hero="{{ $isHomeHero ? 'true' : 'false' }}"
-        class="fixed top-0 inset-x-0 z-50 border-b {{ $isHomeHero ? 'is-transparent bg-transparent border-transparent' : 'bg-white/95 backdrop-blur border-black/5' }}"
+        class="fixed top-0 inset-x-0 shadow-lg z-50 border-b {{ $isHomeHero ? 'is-transparent bg-transparent border-transparent' : 'bg-white/95 backdrop-blur border-black/5' }}"
         style="transform: translateY(0); transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1), background-color 400ms ease, border-color 400ms ease; will-change: transform;">
-    <div class="container flex items-center justify-between py-4">
+    <div class="container flex items-center justify-between py-4 ">
 
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="flex items-center gap-2 shrink-0">
