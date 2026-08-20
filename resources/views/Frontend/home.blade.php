@@ -6,9 +6,9 @@
             <div class="relative h-screen min-h-[560px]">
                 @foreach ($heroSlides as $slide)
                     <div class="hero-slide absolute inset-0 transition-opacity duration-700 {{ $loop->first ? 'opacity-100 z-10' : 'opacity-0 z-0' }}" data-slide="{{ $loop->index }}">
-                        <img src="{{ asset(Storage::url($slide->image)) }}" alt="{{ $slide->title }}" class="h-full w-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10"></div>
-                        <div class="container relative flex h-full items-center">
+                        <img src="{{ asset(Storage::url($slide->image)) }}" alt="{{ $slide->title }}" class="absolute inset-0 z-0 h-full w-full object-cover">
+                        <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/70 via-black/40 to-black/10"></div>
+                        <div class="container relative z-20 flex h-full items-center">
                             <div class="max-w-xl">
                                 @if ($slide->eyebrow)
                                     <span class="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.25em] text-white/80">{{ $slide->eyebrow }}</span>
