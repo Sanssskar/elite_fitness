@@ -5,7 +5,7 @@
     {{-- OUR STORY --}}
     <section class="py-20">
         <div class="container grid items-center gap-14 lg:grid-cols-2">
-            <img src="https://placehold.co/640x560/8E1C54/FFFFFF?text=Our+Studio+Story"
+            <img src="{{ asset('images/about2.jpg') }}"
                  alt="Elite Fitness Studio interior"
                  class="rounded-2xl object-cover shadow-sm">
             <div>
