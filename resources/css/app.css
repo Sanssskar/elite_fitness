@@ -6,6 +6,47 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    /* Brand palette — sampled from the Elite Fitness Studio logo */
+    --color-brand-teal: #105F60;
+    --color-brand-teal-dark: #0B4849;
+    --color-brand-teal-light: #E8F2F1;
+
+    --color-brand-wine: #8E1C54;
+    --color-brand-wine-light: #9C2B6B;
+
+    --color-brand-slate: #3E5868;
+    --color-brand-ink: #1A1A1A;
+    --color-brand-cream: #FBF8F5;
+
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+}
+
+body {
+    @apply font-sans text-brand-ink antialiased;
+}
+
+.font-display {
+    font-family: var(--font-serif);
+}
+
+/* Reusable gradient used for headline accents, echoing the logo's ELITE lettering */
+.text-brand-gradient {
+    background-image: linear-gradient(90deg, var(--color-brand-wine) 0%, var(--color-brand-teal) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-wine px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-brand-teal;
+}
+
+.btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand-teal px-7 py-3 text-sm font-semibold tracking-wide text-brand-teal transition hover:bg-brand-teal hover:text-white;
+}
+
+.section-eyebrow {
+    @apply mb-3 inline-block text-xs font-semibold uppercase tracking-[0.25em] text-brand-wine;
 }
