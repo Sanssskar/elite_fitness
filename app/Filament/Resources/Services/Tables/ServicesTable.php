@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
@@ -38,9 +39,8 @@ class ServicesTable
                     ->label('Order')
                     ->sortable(),
 
-                IconColumn::make('is_active')
-                    ->label('Active')
-                    ->boolean(),
+                ToggleColumn::make('is_active')
+                    ->label('Active'),
             ])
             ->defaultSort('sort_order')
             ->reorderable('sort_order')

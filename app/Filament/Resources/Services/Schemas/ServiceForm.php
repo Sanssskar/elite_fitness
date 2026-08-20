@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Services\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -40,8 +41,7 @@ class ServiceForm
                             ->columnSpanFull()
                             ->helperText('Short summary shown on service cards/listing.'),
 
-                        Textarea::make('description')
-                            ->rows(5)
+                        RichEditor::make('description')
                             ->columnSpanFull()
                             ->helperText('Full description shown on the service detail page.'),
                     ])
@@ -51,7 +51,6 @@ class ServiceForm
                     ->schema([
                         FileUpload::make('image')
                             ->image()
-                            ->directory('services')
                             ->imageEditor()
                             ->columnSpanFull(),
 

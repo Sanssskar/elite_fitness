@@ -10,7 +10,7 @@
                     <span class="section-eyebrow">Service {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                     <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">{{ $service->title }}</h2>
                     @if ($service->description)
-                        <p class="mt-5 text-sm leading-relaxed text-brand-ink/70">{{ $service->description }}</p>
+                        <p class="mt-5 text-sm leading-relaxed text-brand-ink/70">{!! $service->description !!}</p>
                     @elseif ($service->short_description)
                         <p class="mt-5 text-sm leading-relaxed text-brand-ink/70">{{ $service->short_description }}</p>
                     @endif
