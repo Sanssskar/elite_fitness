@@ -18,6 +18,19 @@
         width: 86%;
         margin: auto
     }
+    :root {
+        /* JS overwrites this with the header's real measured height on load/resize */
+        --header-height: 96px;
+    }
+    main {
+        padding-top: var(--header-height);
+    }
+    /* Pages can opt a section out of the header offset (e.g. a full-viewport hero)
+       by adding the .bleed-under-header class, which pulls it back up under the
+       fixed, translucent header. */
+    .bleed-under-header {
+        margin-top: calc(-1 * var(--header-height));
+    }
 </style>
 <body class="bg-brand-cream">
     <x-frontend-header>

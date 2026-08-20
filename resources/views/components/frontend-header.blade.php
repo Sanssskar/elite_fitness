@@ -1,4 +1,13 @@
-<header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-black/5">
+@php
+    // Only the homepage has a full-viewport hero the header can blend into.
+    // Every other page keeps the normal solid header since their banner
+    // isn't full-bleed under the fixed header.
+    $isHomeHero = request()->routeIs('home');
+@endphp
+
+<header id="siteHeader"
+        data-transparent-hero="{{ $isHomeHero ? 'true' : 'false' }}"
+        class="fixed top-0 inset-x-0 z-50 border-b transition-[background-color,border-color,transform] duration-300 ease-in-out {{ $isHomeHero ? 'is-transparent bg-transparent border-transparent' : 'bg-white/95 backdrop-blur border-black/5' }}">
     <div class="container flex items-center justify-between py-4">
 
         {{-- Logo --}}
@@ -20,10 +29,10 @@
             @endphp
             @foreach ($navLinks as $routeName => $label)
                 <a href="{{ route($routeName) }}"
-                   class="relative text-sm font-medium tracking-wide transition {{ request()->routeIs($routeName) ? 'text-brand-wine' : 'text-brand-ink/80 hover:text-brand-wine' }}">
+                   class="nav-link relative text-sm font-medium tracking-wide transition {{ request()->routeIs($routeName) ? 'nav-link-active text-brand-wine' : 'text-brand-ink/80 hover:text-brand-wine' }}">
                     {{ $label }}
                     @if (request()->routeIs($routeName))
-                        <span class="absolute -bottom-2 left-0 h-[2px] w-full bg-brand-wine"></span>
+                        <span class="nav-underline absolute -bottom-2 left-0 h-[2px] w-full bg-brand-wine"></span>
                     @endif
                 </a>
             @endforeach
@@ -34,7 +43,7 @@
         </div>
 
         {{-- Mobile menu button --}}
-        <button type="button" class="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-brand-ink" aria-label="Toggle menu" onclick="document.getElementById('mobileNav').classList.toggle('hidden')">
+        <button type="button" class="menu-icon lg:hidden inline-flex items-center justify-center rounded-md p-2 text-brand-ink transition" aria-label="Toggle menu" onclick="document.getElementById('mobileNav').classList.toggle('hidden')">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -54,3 +63,85 @@
         </div>
     </div>
 </header>
+
+<style>
+    /* Nav text/icon color swap while the header is blended over the hero.
+       Higher specificity than the single Tailwind utility classes above,
+       so no !important needed. */
+    header.is-transparent .nav-link {
+        color: rgba(255, 255, 255, 0.9);
+    }
+    header.is-transparent .nav-link:hover {
+        color: #ffffff;
+    }
+    header.is-transparent .nav-link-active {
+        color: #ffffff;
+    }
+    header.is-transparent .nav-underline {
+        background-color: #ffffff;
+    }
+    header.is-transparent .menu-icon {
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    (function () {
+        const header = document.getElementById('siteHeader');
+        if (!header) return;
+
+        const hasTransparentHero = header.dataset.transparentHero === 'true';
+        if (hasTransparentHero) {
+            header.classList.add('is-transparent');
+        }
+
+        function setHeaderHeightVar() {
+            document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
+        }
+        setHeaderHeightVar();
+        window.addEventListener('resize', setHeaderHeightVar);
+
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+        const hideThreshold = 80; // don't hide until scrolled past the header itself
+
+        function onScroll() {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY <= hideThreshold) {
+                // Always show near the top of the page, blended into the hero if applicable
+                header.classList.remove('-translate-y-full');
+                if (hasTransparentHero) {
+                    header.classList.add('is-transparent', 'bg-transparent', 'border-transparent');
+                    header.classList.remove('bg-white/95', 'backdrop-blur', 'border-black/5');
+                }
+            } else {
+                // Past the hero (or any page without one) — header is always solid from here on
+                if (hasTransparentHero) {
+                    header.classList.remove('is-transparent', 'bg-transparent', 'border-transparent');
+                    header.classList.add('bg-white/95', 'backdrop-blur', 'border-black/5');
+                }
+
+                if (currentScrollY > lastScrollY) {
+                    // Scrolling down
+                    header.classList.add('-translate-y-full');
+                    // Close mobile nav if open when header hides
+                    document.getElementById('mobileNav')?.classList.add('hidden');
+                } else {
+                    // Scrolling up
+                    header.classList.remove('-translate-y-full');
+                }
+            }
+
+            lastScrollY = currentScrollY;
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                window.requestAnimationFrame(onScroll);
+                ticking = true;
+            }
+        }, { passive: true });
+    })();
+</script>

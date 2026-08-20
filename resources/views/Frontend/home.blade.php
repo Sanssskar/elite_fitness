@@ -1,9 +1,9 @@
 <x-frontend-layout :title="'Elite Fitness Studio | Zumba & Yoga in Dharan'" :description="'Elite Fitness Studio offers Zumba and Yoga classes for every level. Book your first class free and start moving with us today.'">
 
-    {{-- HERO CAROUSEL --}}
-    <section class="relative overflow-hidden bg-brand-teal-dark" id="heroCarousel">
+    {{-- HERO CAROUSEL (full viewport height, sits behind the fixed header) --}}
+    <section class="relative overflow-hidden bg-brand-teal-dark bleed-under-header" id="heroCarousel">
         @if ($heroSlides->isNotEmpty())
-            <div class="relative h-[560px] sm:h-[620px] lg:h-[680px]">
+            <div class="relative h-screen min-h-[560px]">
                 @foreach ($heroSlides as $slide)
                     <div class="hero-slide absolute inset-0 transition-opacity duration-700 {{ $loop->first ? 'opacity-100 z-10' : 'opacity-0 z-0' }}" data-slide="{{ $loop->index }}">
                         <img src="{{ asset(Storage::url($slide->image)) }}" alt="{{ $slide->title }}" class="h-full w-full object-cover">
@@ -48,7 +48,7 @@
             </div>
         @else
             {{-- Fallback when no hero slides exist yet in the admin --}}
-            <div class="relative flex h-[420px] items-center justify-center">
+            <div class="relative flex h-screen min-h-[420px] items-center justify-center">
                 <div class="container text-center">
                     <h1 class="font-display text-4xl font-bold text-white sm:text-5xl">Move With Strength. Breathe With Ease.</h1>
                     <p class="mx-auto mt-5 max-w-md text-sm text-white/80">Add hero slides in the admin panel to customize this banner.</p>

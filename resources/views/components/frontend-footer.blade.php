@@ -4,11 +4,9 @@
 
             {{-- Brand --}}
             <div>
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="font-display text-2xl font-bold tracking-wide text-white">ELITE</span>
-                    <span class="flex flex-col leading-[0.85] pl-2 border-l border-white/30">
-                        <span class="text-[10px] font-semibold tracking-[0.2em]">FITNESS</span>
-                        <span class="text-[10px] font-semibold tracking-[0.2em]">STUDIO</span>
+                <div class="mb-5">
+                    <span class="inline-flex items-center rounded-xl bg-white px-4 py-2.5 shadow-sm">
+                        <img class="w-36" src="{{ asset('images/logo.png') }}" alt="Elite Fitness Studio">
                     </span>
                 </div>
                 <p class="text-sm text-white/70 leading-relaxed max-w-xs">
