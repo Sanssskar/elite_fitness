@@ -12,7 +12,7 @@
                      class="w-full rounded-2xl object-cover shadow-sm">
 
                 {{-- floating marketing tags --}}
-                <div class="absolute -bottom-5 animate-bounce -translate-x-5 left-0 flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 shadow-lg ring-1 ring-black/5">
+                <div class="absolute -bottom-5 animate-bounce -translate-x-5 left-0 flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-lg ring-1 ring-black/5">
                     <span class="flex h-7 w-7 items-center justify-center rounded-full bg-brand-wine/10 text-brand-wine">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4.97-3.29-8-6.6-8-10.2A5.8 5.8 0 0 1 12 6a5.8 5.8 0 0 1 8 4.8c0 3.6-3.03 6.91-8 10.2z"/></svg>
                     </span>
