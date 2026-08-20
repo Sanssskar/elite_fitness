@@ -196,7 +196,7 @@
     </section>
 
     {{-- TESTIMONIALS --}}
-    <section class="bg-brand-cream py-20">
+    <section class="bg-brand-teal-light py-20">
         <div class="container">
             <div class="mx-auto max-w-xl text-center">
                 <span class="section-eyebrow">Member Stories</span>
