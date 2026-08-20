@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $title ?? 'Elite Fitness Studio' }}</title>
     <meta name="description" content="{{ $description ?? 'Elite Fitness Studio — Zumba and Yoga classes designed to help you move, breathe, and feel strong.' }}">
-
+<link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
