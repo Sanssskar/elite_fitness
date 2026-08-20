@@ -27,6 +27,11 @@ class PageController extends Controller
         return view('Frontend.instructor');
     }
 
+    public function gallery()
+    {
+        return view('Frontend.gallery');
+    }
+
     public function contact()
     {
         return view('Frontend.contact');

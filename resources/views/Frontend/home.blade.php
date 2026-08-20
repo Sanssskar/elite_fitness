@@ -1,53 +1,124 @@
 <x-frontend-layout :title="'Elite Fitness Studio | Zumba & Yoga in Dharan'" :description="'Elite Fitness Studio offers Zumba and Yoga classes for every level. Book your first class free and start moving with us today.'">
 
-    {{-- HERO --}}
-    <section class="relative overflow-hidden bg-brand-cream">
-        <div class="container grid items-center gap-14 py-16 lg:grid-cols-2 lg:py-24">
-            <div>
-                <span class="section-eyebrow">Zumba &middot; Yoga &middot; Community</span>
-                <h1 class="font-display text-4xl font-bold leading-tight text-brand-ink sm:text-5xl lg:text-[3.4rem]">
-                    Move With Strength.
-                    <span class="text-brand-gradient">Breathe With Ease.</span>
-                </h1>
-                <p class="mt-6 max-w-md text-base leading-relaxed text-brand-ink/70">
-                    Elite Fitness Studio brings high-energy Zumba and mindful Yoga together under one roof —
-                    so you can build strength, flexibility, and a healthier rhythm for everyday life.
-                </p>
-                <div class="mt-8 flex flex-wrap items-center gap-4">
-                    <a href="{{ route('contact') }}" class="btn-primary">Book a Free Class</a>
-                    <a href="{{ route('services') }}" class="btn-outline">View Schedule</a>
-                </div>
+    {{-- HERO CAROUSEL --}}
+    <section class="relative overflow-hidden bg-brand-teal-dark" id="heroCarousel">
+        @php
+            $slides = [
+                [
+                    'image' => 'https://placehold.co/1600x800/105F60/FFFFFF?text=Yoga+%26+Zumba+Studio',
+                    'eyebrow' => 'Zumba · Yoga · Community',
+                    'title' => 'Move With Strength. Breathe With Ease.',
+                    'text' => 'Elite Fitness Studio brings high-energy Zumba and mindful Yoga together under one roof — build strength, flexibility, and a healthier rhythm for everyday life.',
+                ],
+                [
+                    'image' => 'https://placehold.co/1600x800/8E1C54/FFFFFF?text=High-Energy+Zumba',
+                    'eyebrow' => 'Dance · Cardio · Fun',
+                    'title' => 'High-Energy Zumba Classes',
+                    'text' => 'Latin and global rhythms, easy-to-follow choreography, and a room full of people who\'ll cheer you on from day one.',
+                ],
+                [
+                    'image' => 'https://placehold.co/1600x800/3E5868/FFFFFF?text=Find+Your+Calm',
+                    'eyebrow' => 'Balance · Breath · Focus',
+                    'title' => 'Find Your Calm With Yoga',
+                    'text' => 'From grounding Hatha to flowing Vinyasa and deeply restorative sessions — build flexibility and calm at your own pace.',
+                ],
+                [
+                    'image' => 'https://placehold.co/1600x800/9C2B6B/FFFFFF?text=First+Class+Free',
+                    'eyebrow' => 'New Here?',
+                    'title' => 'Your First Class Is On Us',
+                    'text' => 'No commitment, no pressure — just come see what Elite Fitness Studio feels like. We\'ll save you a spot.',
+                ],
+            ];
+        @endphp
 
-                <div class="mt-10 flex items-center gap-6 border-t border-black/10 pt-6">
-                    <div>
-                        <p class="font-display text-2xl font-bold text-brand-wine">500+</p>
-                        <p class="text-xs text-brand-ink/60">Happy Members</p>
-                    </div>
-                    <div class="h-8 w-px bg-black/10"></div>
-                    <div>
-                        <p class="font-display text-2xl font-bold text-brand-wine">12+</p>
-                        <p class="text-xs text-brand-ink/60">Weekly Classes</p>
-                    </div>
-                    <div class="h-8 w-px bg-black/10"></div>
-                    <div>
-                        <p class="font-display text-2xl font-bold text-brand-wine">5</p>
-                        <p class="text-xs text-brand-ink/60">Years Running</p>
+        <div class="relative h-[560px] sm:h-[620px] lg:h-[680px]">
+            @foreach ($slides as $i => $slide)
+                <div class="hero-slide absolute inset-0 transition-opacity duration-700 {{ $i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' }}" data-slide="{{ $i }}">
+                    <img src="{{ $slide['image'] }}" alt="{{ $slide['title'] }}" class="h-full w-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/10"></div>
+                    <div class="container relative flex h-full items-center">
+                        <div class="max-w-xl">
+                            <span class="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.25em] text-white/80">{{ $slide['eyebrow'] }}</span>
+                            <h1 class="font-display text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-[3.2rem]">{{ $slide['title'] }}</h1>
+                            <p class="mt-5 max-w-md text-sm leading-relaxed text-white/80 sm:text-base">{{ $slide['text'] }}</p>
+                            {{-- Static buttons — same two CTAs on every slide, not editable per slide from the admin --}}
+                            <div class="mt-8 flex flex-wrap items-center gap-4">
+                                <a href="{{ route('contact') }}" class="btn-primary">Book a Free Class</a>
+                                <a href="{{ route('services') }}" class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/70 px-7 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-white hover:text-brand-ink">View Schedule</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
 
-            <div class="relative">
-                <div class="absolute -right-6 -top-6 -z-10 h-full w-full rounded-[2rem] bg-brand-teal/15"></div>
-                <img src="https://placehold.co/640x760/105F60/FFFFFF?text=Yoga+%26+Zumba+Studio"
-                     alt="Elite Fitness Studio class in session"
-                     class="h-full w-full rounded-[2rem] object-cover shadow-xl">
-                <div class="absolute -bottom-6 -left-6 hidden rounded-2xl bg-white px-6 py-4 shadow-lg sm:block">
-                    <p class="font-display text-lg font-bold text-brand-wine">Free First Class</p>
-                    <p class="text-xs text-brand-ink/60">No commitment required</p>
-                </div>
+            {{-- Arrows --}}
+            <button type="button" id="heroPrev" aria-label="Previous slide"
+                    class="absolute left-4 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:left-8">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button type="button" id="heroNext" aria-label="Next slide"
+                    class="absolute right-4 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:right-8">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+
+            {{-- Dots --}}
+            <div class="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+                @foreach ($slides as $i => $slide)
+                    <button type="button" class="hero-dot h-2.5 rounded-full bg-white/50 transition-all {{ $i === 0 ? 'w-8 bg-white' : 'w-2.5' }}" data-dot="{{ $i }}" aria-label="Go to slide {{ $i + 1 }}"></button>
+                @endforeach
             </div>
         </div>
     </section>
+
+    <script>
+        (function () {
+            const root = document.getElementById('heroCarousel');
+            if (!root) return;
+
+            const slides = root.querySelectorAll('.hero-slide');
+            const dots = root.querySelectorAll('.hero-dot');
+            const prevBtn = document.getElementById('heroPrev');
+            const nextBtn = document.getElementById('heroNext');
+            let current = 0;
+            let timer;
+
+            function goTo(index) {
+                slides[current].classList.remove('opacity-100', 'z-10');
+                slides[current].classList.add('opacity-0', 'z-0');
+                dots[current].classList.remove('w-8', 'bg-white');
+                dots[current].classList.add('w-2.5', 'bg-white/50');
+
+                current = (index + slides.length) % slides.length;
+
+                slides[current].classList.remove('opacity-0', 'z-0');
+                slides[current].classList.add('opacity-100', 'z-10');
+                dots[current].classList.remove('w-2.5', 'bg-white/50');
+                dots[current].classList.add('w-8', 'bg-white');
+            }
+
+            function next() { goTo(current + 1); }
+            function prev() { goTo(current - 1); }
+
+            function startAutoplay() {
+                timer = setInterval(next, 6000);
+            }
+            function resetAutoplay() {
+                clearInterval(timer);
+                startAutoplay();
+            }
+
+            nextBtn.addEventListener('click', function () { next(); resetAutoplay(); });
+            prevBtn.addEventListener('click', function () { prev(); resetAutoplay(); });
+            dots.forEach(function (dot) {
+                dot.addEventListener('click', function () {
+                    goTo(parseInt(dot.dataset.dot, 10));
+                    resetAutoplay();
+                });
+            });
+
+            startAutoplay();
+        })();
+    </script>
 
     {{-- SERVICES PREVIEW --}}
     <section class="py-20">

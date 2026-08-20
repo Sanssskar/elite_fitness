@@ -35,6 +35,7 @@
                     <li><a href="{{ route('about') }}" class="hover:text-white transition">About Us</a></li>
                     <li><a href="{{ route('services') }}" class="hover:text-white transition">Services</a></li>
                     <li><a href="{{ route('instructor') }}" class="hover:text-white transition">Instructor</a></li>
+                    <li><a href="{{ route('gallery') }}" class="hover:text-white transition">Gallery</a></li>
                     <li><a href="{{ route('contact') }}" class="hover:text-white transition">Contact</a></li>
                 </ul>
             </div>

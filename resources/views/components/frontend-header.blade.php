@@ -14,6 +14,7 @@
                     'about' => 'About',
                     'services' => 'Services',
                     'instructor' => 'Instructor',
+                    'gallery' => 'Gallery',
                     'contact' => 'Contact',
                 ];
             @endphp
