@@ -18,7 +18,8 @@ class HeroSlideForm
                 Section::make('Slide Image')
                     ->schema([
                         FileUpload::make('image')
-                          
+                            ->image()
+                            ->imageEditor()
                             ->required()
                             ->helperText('Recommended: wide banner image (e.g. 1920x900px).')
                             ->columnSpanFull(),

@@ -7,6 +7,7 @@
         <div class="container">
             <div class="grid gap-6 sm:grid-cols-3">
                 @php
+                    // No settings table exists for this yet — still static. Say the word and I'll add one.
                     $infoCards = [
                         ['title' => 'Visit the Studio', 'lines' => ['123 Wellness Avenue', 'Dharan, Koshi, Nepal']],
                         ['title' => 'Call or Email', 'lines' => ['+977 000-000000', 'hello@elitefitnessstudio.com']],
@@ -28,42 +29,65 @@
 
             {{-- FORM + MAP --}}
             <div class="mt-14 grid gap-10 lg:grid-cols-2">
-                {{-- Form (static, non-functional placeholder) --}}
+                {{-- Form (submits to the contacts table) --}}
                 <div class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-black/5">
                     <h3 class="font-display text-xl font-bold text-brand-ink">Send Us a Message</h3>
-                    <p class="mt-2 text-sm text-brand-ink/60">This form is a visual placeholder for now — no submission logic is wired up yet.</p>
+                    <p class="mt-2 text-sm text-brand-ink/60">We'll get back to you as soon as we can.</p>
 
-                    <form class="mt-6 space-y-5" onsubmit="return false;">
+                    @if (session('success'))
+                        <div class="mt-5 rounded-xl bg-brand-teal-light px-4 py-3 text-sm font-medium text-brand-teal">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('contact.submit') }}" class="mt-6 space-y-5">
+                        @csrf
                         <div class="grid gap-5 sm:grid-cols-2">
                             <div>
                                 <label class="mb-1.5 block text-xs font-semibold text-brand-ink/70">Full Name</label>
-                                <input type="text" placeholder="Your name"
+                                <input type="text" name="name" value="{{ old('name') }}" placeholder="Your name"
                                        class="w-full rounded-xl border border-black/10 px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/35 focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/20">
+                                @error('name')
+                                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label class="mb-1.5 block text-xs font-semibold text-brand-ink/70">Phone</label>
-                                <input type="text" placeholder="Your phone number"
+                                <input type="text" name="phone" value="{{ old('phone') }}" placeholder="Your phone number"
                                        class="w-full rounded-xl border border-black/10 px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/35 focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/20">
+                                @error('phone')
+                                    <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div>
                             <label class="mb-1.5 block text-xs font-semibold text-brand-ink/70">Email</label>
-                            <input type="email" placeholder="you@example.com"
+                            <input type="email" name="email" value="{{ old('email') }}" placeholder="you@example.com"
                                    class="w-full rounded-xl border border-black/10 px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/35 focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/20">
+                            @error('email')
+                                <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label class="mb-1.5 block text-xs font-semibold text-brand-ink/70">Interested In</label>
-                            <select class="w-full rounded-xl border border-black/10 px-4 py-3 text-sm text-brand-ink focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/20">
-                                <option>Zumba Classes</option>
-                                <option>Yoga Classes</option>
-                                <option>Membership Pricing</option>
-                                <option>General Inquiry</option>
+                            <select name="interested_in"
+                                    class="w-full rounded-xl border border-black/10 px-4 py-3 text-sm text-brand-ink focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/20">
+                                <option value="" disabled {{ old('interested_in') ? '' : 'selected' }}>Select an option</option>
+                                @foreach (['Zumba Classes', 'Yoga Classes', 'Membership Pricing', 'General Inquiry'] as $option)
+                                    <option value="{{ $option }}" {{ old('interested_in') === $option ? 'selected' : '' }}>{{ $option }}</option>
+                                @endforeach
                             </select>
+                            @error('interested_in')
+                                <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label class="mb-1.5 block text-xs font-semibold text-brand-ink/70">Message</label>
-                            <textarea rows="4" placeholder="Tell us a bit about what you're looking for"
-                                      class="w-full rounded-xl border border-black/10 px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/35 focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/20"></textarea>
+                            <textarea name="message" rows="4" placeholder="Tell us a bit about what you're looking for"
+                                      class="w-full rounded-xl border border-black/10 px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink/35 focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/20">{{ old('message') }}</textarea>
+                            @error('message')
+                                <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
                         <button type="submit" class="btn-primary w-full">Send Message</button>
                     </form>

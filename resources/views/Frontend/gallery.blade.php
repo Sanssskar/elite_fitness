@@ -5,34 +5,29 @@
     {{-- MASONRY GALLERY --}}
     <section class="py-20">
         <div class="container">
-            @php
-                $photos = [
-                    ['src' => 'https://placehold.co/600x800/8E1C54/FFFFFF?text=Zumba+Class', 'alt' => 'Zumba class in session'],
-                    ['src' => 'https://placehold.co/600x450/105F60/FFFFFF?text=Yoga+Flow', 'alt' => 'Yoga flow session'],
-                    ['src' => 'https://placehold.co/600x700/3E5868/FFFFFF?text=Studio+Space', 'alt' => 'Elite Fitness Studio interior'],
-                    ['src' => 'https://placehold.co/600x500/9C2B6B/FFFFFF?text=Group+Warm-Up', 'alt' => 'Group warm-up before class'],
-                    ['src' => 'https://placehold.co/600x780/105F60/FFFFFF?text=Restorative+Yoga', 'alt' => 'Restorative Yoga session'],
-                    ['src' => 'https://placehold.co/600x480/8E1C54/FFFFFF?text=Zumba+Toning', 'alt' => 'Zumba Toning class'],
-                    ['src' => 'https://placehold.co/600x640/3E5868/FFFFFF?text=Instructor+Led+Session', 'alt' => 'Instructor guiding a session'],
-                    ['src' => 'https://placehold.co/600x520/9C2B6B/FFFFFF?text=Community+Event', 'alt' => 'Studio community event'],
-                    ['src' => 'https://placehold.co/600x760/105F60/FFFFFF?text=Hatha+Yoga', 'alt' => 'Hatha Yoga class'],
-                    ['src' => 'https://placehold.co/600x460/8E1C54/FFFFFF?text=Cardio+Dance', 'alt' => 'Cardio dance session'],
-                    ['src' => 'https://placehold.co/600x700/3E5868/FFFFFF?text=Reception+Area', 'alt' => 'Studio reception area'],
-                    ['src' => 'https://placehold.co/600x560/9C2B6B/FFFFFF?text=Vinyasa+Flow', 'alt' => 'Vinyasa Flow class'],
-                ];
-            @endphp
+            @if ($photos->isNotEmpty())
+                @if ($categories->count() > 1)
+                    <div class="mb-10 flex flex-wrap justify-center gap-2" id="galleryFilters">
+                        <button type="button" data-filter="all" class="gallery-filter-btn is-active rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wide transition">All</button>
+                        @foreach ($categories as $category)
+                            <button type="button" data-filter="{{ $category }}" class="gallery-filter-btn rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wide transition">{{ $category }}</button>
+                        @endforeach
+                    </div>
+                @endif
 
-            <div class="columns-1 sm:columns-2 lg:columns-3 [column-gap:0px] [column-fill:_balance]">
-                @foreach ($photos as $photo)
-                    <button type="button"
-                            class="gallery-item block w-full overflow-hidden"
-                            data-full="{{ $photo['src'] }}" data-alt="{{ $photo['alt'] }}">
-                        <img src="{{ $photo['src'] }}" alt="{{ $photo['alt'] }}" loading="lazy" class="block w-full h-auto align-bottom">
-                    </button>
-                @endforeach
-            </div>
-
-            <p class="mt-8 text-center text-xs text-brand-ink/50">Placeholder photos — swap these out for real studio shots any time.</p>
+                <div class="columns-1 sm:columns-2 lg:columns-3 [column-gap:0px] [column-fill:_balance]" id="galleryGrid">
+                    @foreach ($photos as $photo)
+                        <button type="button"
+                                class="gallery-item block w-full overflow-hidden"
+                                data-category="{{ $photo->category }}"
+                                data-full="{{ asset('storage/' . $photo->image) }}" data-alt="{{ $photo->alt_text ?? $photo->title }}">
+                            <img src="{{ asset('storage/' . $photo->image) }}" alt="{{ $photo->alt_text ?? $photo->title }}" loading="lazy" class="block w-full h-auto align-bottom">
+                        </button>
+                    @endforeach
+                </div>
+            @else
+                <p class="text-center text-sm text-brand-ink/50">Add photos in the admin panel and they'll appear here.</p>
+            @endif
         </div>
     </section>
 
@@ -45,12 +40,18 @@
         <img id="lightboxImg" src="" alt="" class="max-h-[85vh] max-w-[90vw] rounded-xl object-contain shadow-2xl">
     </div>
 
+    <style>
+        .gallery-filter-btn { background: rgba(0,0,0,.05); color: rgba(20,20,20,.6); }
+        .gallery-filter-btn.is-active { background: var(--color-brand-wine, #8E1C54); color: #fff; }
+    </style>
+
     <script>
         (function () {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightboxImg');
             const closeBtn = document.getElementById('lightboxClose');
             const items = document.querySelectorAll('.gallery-item');
+            const filterBtns = document.querySelectorAll('.gallery-filter-btn');
 
             function open(src, alt) {
                 lightboxImg.src = src;
@@ -78,6 +79,19 @@
             });
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') close();
+            });
+
+            filterBtns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    filterBtns.forEach(function (b) { b.classList.remove('is-active'); });
+                    btn.classList.add('is-active');
+
+                    const filter = btn.dataset.filter;
+                    items.forEach(function (item) {
+                        const show = filter === 'all' || item.dataset.category === filter;
+                        item.style.display = show ? '' : 'none';
+                    });
+                });
             });
         })();
     </script>
