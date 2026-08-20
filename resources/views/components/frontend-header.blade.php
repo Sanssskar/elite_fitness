@@ -7,7 +7,8 @@
 
 <header id="siteHeader"
         data-transparent-hero="{{ $isHomeHero ? 'true' : 'false' }}"
-        class="fixed top-0 inset-x-0 z-50 border-b transition-[background-color,border-color,transform] duration-300 ease-in-out {{ $isHomeHero ? 'is-transparent bg-transparent border-transparent' : 'bg-white/95 backdrop-blur border-black/5' }}">
+        class="fixed top-0 inset-x-0 z-50 border-b {{ $isHomeHero ? 'is-transparent bg-transparent border-transparent' : 'bg-white/95 backdrop-blur border-black/5' }}"
+        style="transform: translateY(0); transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1), background-color 400ms ease, border-color 400ms ease; will-change: transform;">
     <div class="container flex items-center justify-between py-4">
 
         {{-- Logo --}}
@@ -102,34 +103,52 @@
         window.addEventListener('resize', setHeaderHeightVar);
 
         let lastScrollY = window.scrollY;
+        let isHidden = false;
         let ticking = false;
-        const hideThreshold = 80; // don't hide until scrolled past the header itself
+        const hideThreshold = 80;   // don't hide until scrolled past the header itself
+        const minDelta = 6;         // ignore tiny scroll jitter so the animation never gets interrupted/restarted
+
+        function show() {
+            if (isHidden) {
+                header.style.transform = 'translateY(0)';
+                isHidden = false;
+            }
+        }
+
+        function hide() {
+            if (!isHidden) {
+                header.style.transform = 'translateY(-100%)';
+                isHidden = true;
+            }
+        }
 
         function onScroll() {
             const currentScrollY = window.scrollY;
+            const delta = currentScrollY - lastScrollY;
 
             if (currentScrollY <= hideThreshold) {
                 // Always show near the top of the page, blended into the hero if applicable
-                header.classList.remove('-translate-y-full');
+                show();
                 if (hasTransparentHero) {
                     header.classList.add('is-transparent', 'bg-transparent', 'border-transparent');
                     header.classList.remove('bg-white/95', 'backdrop-blur', 'border-black/5');
                 }
             } else {
-                // Past the hero (or any page without one) — header is always solid from here on
+                // Past the hero (or any page without one) — header is solid from here on
                 if (hasTransparentHero) {
                     header.classList.remove('is-transparent', 'bg-transparent', 'border-transparent');
                     header.classList.add('bg-white/95', 'backdrop-blur', 'border-black/5');
                 }
 
-                if (currentScrollY > lastScrollY) {
-                    // Scrolling down
-                    header.classList.add('-translate-y-full');
-                    // Close mobile nav if open when header hides
-                    document.getElementById('mobileNav')?.classList.add('hidden');
-                } else {
-                    // Scrolling up
-                    header.classList.remove('-translate-y-full');
+                if (Math.abs(delta) >= minDelta) {
+                    if (delta > 0) {
+                        // Scrolling down — slide the header up out of view
+                        hide();
+                        document.getElementById('mobileNav')?.classList.add('hidden');
+                    } else {
+                        // Scrolling up — slide the header back into view
+                        show();
+                    }
                 }
             }
 
