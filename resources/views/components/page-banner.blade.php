@@ -1,22 +1,24 @@
-@props(['eyebrow' => null, 'title', 'subtitle' => null])
+@props(['eyebrow' => null, 'title', 'subtitle' => null, 'image' => null])
 
-<section class="relative overflow-hidden bg-brand-teal-dark py-20 sm:py-24">
-    <div class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-wine/20 blur-3xl"></div>
-    <div class="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-brand-teal/30 blur-3xl"></div>
+@php
+    $bannerImage = $image ?? asset('images/about2.jpg');
+@endphp
+
+<section class="relative overflow-hidden bg-brand-teal-dark py-24 sm:py-28">
+    {{-- background image --}}
+    <img src="{{ $bannerImage }}" alt="" class="absolute inset-0 h-full w-full object-cover">
+
+    {{-- dark overlay for text contrast --}}
+    <div class="absolute inset-0 bg-brand-teal-dark/70"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-teal-dark/90 via-transparent to-brand-teal-dark/40"></div>
 
     <div class="container relative text-center">
         @if ($eyebrow)
-            <span class="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.25em] text-white/70">{{ $eyebrow }}</span>
+            <span class="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.25em] text-white/80">{{ $eyebrow }}</span>
         @endif
-        <h1 class="font-display text-4xl font-bold text-white sm:text-5xl">{{ $title }}</h1>
+        <h1 class="font-display text-4xl font-bold text-white drop-shadow-sm sm:text-5xl">{{ $title }}</h1>
         @if ($subtitle)
-            <p class="mx-auto mt-4 max-w-xl text-sm text-white/70 sm:text-base">{{ $subtitle }}</p>
+            <p class="mx-auto mt-4 max-w-xl text-sm text-white/85 sm:text-base">{{ $subtitle }}</p>
         @endif
-
-        <div class="mt-6 flex items-center justify-center gap-2 text-xs font-medium text-white/60">
-            <a href="{{ route('home') }}" class="hover:text-white transition">Home</a>
-            <span>/</span>
-            <span class="text-white">{{ $title }}</span>
-        </div>
     </div>
 </section>

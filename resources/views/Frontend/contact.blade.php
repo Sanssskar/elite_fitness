@@ -1,7 +1,8 @@
 <x-frontend-layout :title="'Contact Us | Elite Fitness Studio'" :description="'Get in touch with Elite Fitness Studio to book a Zumba or Yoga class, ask about membership, or plan your visit.'">
 
     <x-page-banner eyebrow="Get In Touch" title="We'd Love to Hear From You"
-        subtitle="Questions about classes, pricing, or your first visit? Reach out — we usually reply within a day." />
+        subtitle="Questions about classes, pricing, or your first visit? Reach out — we usually reply within a day."
+        image="{{ asset('images/contact-banner.jpg') }}" />
 
     <section class="py-20">
         <div class="container">

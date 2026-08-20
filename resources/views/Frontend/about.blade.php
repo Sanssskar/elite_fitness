@@ -1,11 +1,12 @@
 <x-frontend-layout :title="'About Us | Elite Fitness Studio'" :description="'Learn about Elite Fitness Studio\'s story, mission, and the values that shape every Zumba and Yoga class we teach.'">
 
-    <x-page-banner eyebrow="About Elite" title="Our Story, Our Studio" subtitle="A space built on movement, community, and honest care for every member who walks through our doors." />
+    <x-page-banner eyebrow="About Elite" title="Our Story, Our Studio" subtitle="A space built on movement, community, and honest care for every member who walks through our doors."
+        image="{{ asset('images/about-banner.jpg') }}" />
 
     {{-- OUR STORY --}}
     <section class="py-20">
         <div class="container grid items-center gap-14 lg:grid-cols-2">
-            <img src="{{ asset('images/about2.jpg') }}"
+            <img src="{{ asset('images/about-banner.jpg') }}"
                  alt="Elite Fitness Studio interior"
                  class="rounded-2xl object-cover shadow-sm">
             <div>

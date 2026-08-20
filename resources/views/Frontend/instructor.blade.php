@@ -1,6 +1,7 @@
 <x-frontend-layout :title="'Instructors | Elite Fitness Studio'" :description="'Meet the certified Zumba and Yoga instructors at Elite Fitness Studio.'">
 
-    <x-page-banner eyebrow="Our Team" title="Meet Your Instructors" subtitle="Certified, experienced, and genuinely invested in helping you move better every class." />
+    <x-page-banner eyebrow="Our Team" title="Meet Your Instructors" subtitle="Certified, experienced, and genuinely invested in helping you move better every class."
+        image="{{ asset('images/instructor-banner.jpg') }}" />
 
     {{-- INSTRUCTOR GRID --}}
     <section class="py-20">

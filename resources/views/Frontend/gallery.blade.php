@@ -1,6 +1,7 @@
 <x-frontend-layout :title="'Gallery | Elite Fitness Studio'" :description="'Browse photos from Zumba and Yoga classes, events, and the studio space at Elite Fitness Studio.'">
 
-    <x-page-banner eyebrow="Take a Look" title="Studio Gallery" subtitle="A peek into our classes, our space, and the community that makes Elite what it is." />
+    <x-page-banner eyebrow="Take a Look" title="Studio Gallery" subtitle="A peek into our classes, our space, and the community that makes Elite what it is."
+        image="{{ asset('images/gallery-banner.jpg') }}" />
 
     {{-- MASONRY GALLERY --}}
     <section class="py-20">

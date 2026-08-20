@@ -1,6 +1,7 @@
 <x-frontend-layout :title="'Services | Elite Fitness Studio'" :description="'Explore Zumba and Yoga class offerings at Elite Fitness Studio, plus membership pricing for every commitment level.'">
 
-    <x-page-banner eyebrow="Our Services" title="Find Your Strength & Balance" subtitle="Energize your body, relax your mind, and feel your best." />
+    <x-page-banner eyebrow="Our Services" title="Find Your Strength & Balance" subtitle="Energize your body, relax your mind, and feel your best."
+        image="{{ asset('images/services-banner.jpg') }}" />
 
     {{-- SERVICES --}}
     @forelse ($services as $service)
