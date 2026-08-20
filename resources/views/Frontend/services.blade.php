@@ -1,6 +1,6 @@
 <x-frontend-layout :title="'Services | Elite Fitness Studio'" :description="'Explore Zumba and Yoga class offerings at Elite Fitness Studio, plus membership pricing for every commitment level.'">
 
-    <x-page-banner eyebrow="Our Services" title="Zumba &amp; Yoga, Done Right" subtitle="Two practices designed to build strength, flexibility, and confidence — at a pace that suits you." />
+    <x-page-banner eyebrow="Our Services" title="Find Your Strength & Balance" subtitle="Energize your body, relax your mind, and feel your best." />
 
     {{-- SERVICES --}}
     @forelse ($services as $service)
