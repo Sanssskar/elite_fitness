@@ -146,7 +146,6 @@
                         hide();
                         document.getElementById('mobileNav')?.classList.add('hidden');
                     } else {
-                        // Scrolling up — slide the header back into view
                         show();
                     }
                 }
