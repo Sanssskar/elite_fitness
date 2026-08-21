@@ -89,7 +89,7 @@
                 function prev() { goTo(current - 1); }
 
                 function startAutoplay() {
-                    timer = setInterval(next, 6000);
+                    timer = setInterval(next, 5000);
                 }
                 function resetAutoplay() {
                     clearInterval(timer);

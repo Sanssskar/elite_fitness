@@ -22,42 +22,51 @@
                     @endphp
 
                     @foreach ($instructors as $person)
-                        <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-lg" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 100 }}">
-                            <div class="overflow-hidden">
+                        {{-- HOVER CARD --}}
+                        <div class="group relative overflow-hidden rounded-2xl bg-brand-slate shadow-sm ring-1 ring-black/5 transition duration-500 hover:shadow-xl" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 100 }}">
+                            <div class="h-[420px] w-full">
                                 <img src="{{ $person->image ? asset('storage/' . $person->image) : 'https://placehold.co/560x600/3E5868/FFFFFF?text=' . urlencode($person->name) }}"
                                      alt="{{ $person->name }}"
-                                     class="h-64 w-full object-cover transition duration-500 group-hover:scale-105">
+                                     class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
                             </div>
-                            <div class="p-6">
-                                <h3 class="font-display text-lg font-bold text-brand-ink">{{ $person->name }}</h3>
-                                @if ($person->role)
-                                    <p class="text-xs font-semibold uppercase tracking-wide text-brand-wine">{{ $person->role }}</p>
-                                @endif
-                                @if ($person->bio)
-                                    <p class="mt-3 text-sm leading-relaxed text-brand-ink/65">{{ $person->bio }}</p>
-                                @endif
 
-                                @if (!empty($person->specialties))
-                                    <div class="mt-4 flex flex-wrap gap-2">
-                                        @foreach ($person->specialties as $tag)
-                                            <span class="rounded-full bg-brand-teal-light px-3 py-1 text-[11px] font-semibold text-brand-teal">{{ $tag }}</span>
-                                        @endforeach
-                                    </div>
-                                @endif
+                            {{-- HOVER OVERLAY: dark backdrop with name, role tag, bio, specialty tags, socials --}}
+                            <div class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/60 to-black/10 p-6 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                                <div class="translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                                    <h3 class="font-display text-lg font-bold text-white">{{ $person->name }}</h3>
 
-                                @if ($person->socials->isNotEmpty())
-                                    <div class="mt-5 flex gap-3 border-t border-black/5 pt-4">
-                                        @foreach ($person->socials as $social)
-                                            <a href="{{ $social->url }}" target="_blank" rel="noopener"
-                                               class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-ink/5 text-brand-ink/60 hover:bg-brand-wine hover:text-white transition"
-                                               aria-label="{{ ucfirst($social->platform) }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
-                                                    {!! $socialIcons[$social->platform] ?? $socialIcons['website'] !!}
-                                                </svg>
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                @endif
+                                    @if ($person->role)
+                                        <span class="mt-2 inline-block rounded-full bg-brand-wine px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
+                                            {{ $person->role }}
+                                        </span>
+                                    @endif
+
+                                    @if ($person->bio)
+                                        <p class="mt-3 text-sm leading-relaxed text-white/75">{{ $person->bio }}</p>
+                                    @endif
+
+                                    @if (!empty($person->specialties))
+                                        <div class="mt-4 flex flex-wrap gap-2">
+                                            @foreach ($person->specialties as $tag)
+                                                <span class="rounded-full bg-brand-teal-light px-3 py-1 text-[11px] font-semibold text-brand-teal">{{ $tag }}</span>
+                                            @endforeach
+                                        </div>
+                                    @endif
+
+                                    @if ($person->socials->isNotEmpty())
+                                        <div class="mt-5 flex gap-3 border-t border-white/15 pt-4">
+                                            @foreach ($person->socials as $social)
+                                                <a href="{{ $social->url }}" target="_blank" rel="noopener"
+                                                   class="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/80 transition hover:bg-brand-wine hover:text-white"
+                                                   aria-label="{{ ucfirst($social->platform) }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
+                                                        {!! $socialIcons[$social->platform] ?? $socialIcons['website'] !!}
+                                                    </svg>
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     @endforeach

@@ -10,7 +10,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Images finishing late (hero photos, gallery grid) shift section positions
-// after AOS has already calculated its trigger offsets — refresh once
-// everything has actually loaded so those offsets are accurate.
 window.addEventListener('load', () => AOS.refresh());
