@@ -6,7 +6,7 @@
     {{-- OUR STORY --}}
     <section class="py-20">
         <div class="container grid items-center gap-14 lg:grid-cols-2">
-            <div class="relative">
+            <div class="relative" data-aos="fade-right">
                 <img src="{{ asset('images/yoga.jpg') }}"
                      alt="Elite Fitness Studio interior"
                      class="w-full rounded-2xl object-cover shadow-sm">
@@ -26,7 +26,7 @@
                     <span class="text-xs font-semibold text-white">Certified Instructors</span>
                 </div>
             </div>
-            <div>
+            <div data-aos="fade-left">
                 <span class="section-eyebrow">How We Started</span>
                 <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">Founded on the Belief That Fitness Should Feel Good</h2>
                 <p class="mt-6 text-sm leading-relaxed text-brand-ink/70">
@@ -47,7 +47,7 @@
     {{-- MISSION & VALUES --}}
     <section class="bg-brand-teal-light py-20">
         <div class="container">
-            <div class="mx-auto max-w-xl text-center">
+            <div class="mx-auto max-w-xl text-center" data-aos="fade-up">
                 <span class="section-eyebrow">What Drives Us</span>
                 <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">Our Mission &amp; Values</h2>
             </div>
@@ -61,7 +61,7 @@
                     ];
                 @endphp
                 @foreach ($values as $value)
-                    <div class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-black/5 text-center">
+                    <div class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-black/5 text-center" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-wine/10 text-brand-wine">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4.97-3.29-8-6.6-8-10.2A5.8 5.8 0 0 1 12 6a5.8 5.8 0 0 1 8 4.8c0 3.6-3.03 6.91-8 10.2z"/></svg>
                         </div>
@@ -76,7 +76,7 @@
     {{-- SERVICES PREVIEW --}}
     <section class="py-20">
         <div class="container">
-            <div class="mx-auto max-w-xl text-center">
+            <div class="mx-auto max-w-xl text-center" data-aos="fade-up">
                 <span class="section-eyebrow">What We Offer</span>
                 <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">Explore Our Classes</h2>
                 <p class="mt-4 text-sm leading-relaxed text-brand-ink/65">
@@ -84,38 +84,31 @@
                 </p>
             </div>
 
-            <div class="mt-14 grid gap-8 md:grid-cols-2">
-                <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-lg">
-                    <div class="overflow-hidden">
-                        <img src="https://placehold.co/700x420/8E1C54/FFFFFF?text=Zumba"
-                             alt="Zumba classes"
-                             class="h-56 w-full object-cover transition duration-500 group-hover:scale-105">
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-display text-xl font-bold text-brand-ink">Zumba</h3>
-                        <p class="mt-3 text-sm leading-relaxed text-brand-ink/70">High-energy dance workouts set to music that make every session feel like a party.</p>
-                        <a href="{{ route('services') }}" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-wine">
-                            Explore Zumba
-                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </a>
-                    </div>
+            @if ($services->isNotEmpty())
+                <div class="mt-14 grid gap-8 md:grid-cols-2">
+                    @foreach ($services as $service)
+                        <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-lg" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                            <div class="overflow-hidden">
+                                <img src="{{ $service->image ? asset('storage/' . $service->image) : 'https://placehold.co/700x420/8E1C54/FFFFFF?text=' . urlencode($service->title) }}"
+                                     alt="{{ $service->title }}"
+                                     class="h-56 w-full object-cover transition duration-500 group-hover:scale-105">
+                            </div>
+                            <div class="p-8">
+                                <h3 class="font-display text-xl font-bold text-brand-ink">{{ $service->title }}</h3>
+                                @if ($service->short_description)
+                                    <p class="mt-3 text-sm leading-relaxed text-brand-ink/70">{{ $service->short_description }}</p>
+                                @endif
+                                <a href="{{ route('services') }}" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-wine">
+                                    Explore {{ $service->title }}
+                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-lg">
-                    <div class="overflow-hidden">
-                        <img src="https://placehold.co/700x420/3E5868/FFFFFF?text=Yoga"
-                             alt="Yoga classes"
-                             class="h-56 w-full object-cover transition duration-500 group-hover:scale-105">
-                    </div>
-                    <div class="p-8">
-                        <h3 class="font-display text-xl font-bold text-brand-ink">Yoga</h3>
-                        <p class="mt-3 text-sm leading-relaxed text-brand-ink/70">Calm, guided practice that builds flexibility, strength, and a clearer mind.</p>
-                        <a href="{{ route('services') }}" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-wine">
-                            Explore Yoga
-                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @else
+                <p class="mt-14 text-center text-sm text-brand-ink/50">Add services in the admin panel to showcase them here.</p>
+            @endif
 
             <div class="mt-10 text-center">
                 <a href="{{ route('services') }}" class="btn-primary">View All Services</a>
@@ -126,10 +119,10 @@
     {{-- INSTRUCTOR TEASER --}}
     <section class="bg-brand-teal-light py-20">
         <div class="container grid items-center gap-12 lg:grid-cols-2">
-            <img src="https://placehold.co/640x520/3E5868/FFFFFF?text=Meet+Our+Instructors"
+            <img src="{{ $leadInstructor && $leadInstructor->image ? asset('storage/' . $leadInstructor->image) : 'https://placehold.co/640x520/3E5868/FFFFFF?text=Meet+Our+Instructors' }}"
                  alt="Elite Fitness Studio instructors"
-                 class="rounded-2xl object-cover shadow-sm">
-            <div>
+                 class="rounded-2xl object-cover shadow-sm" data-aos="fade-right">
+            <div data-aos="fade-left">
                 <span class="section-eyebrow">Meet The Team</span>
                 <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">Guided by Certified, Caring Instructors</h2>
                 <p class="mt-5 text-sm leading-relaxed text-brand-ink/70">
@@ -144,7 +137,7 @@
     {{-- GALLERY PREVIEW --}}
     <section class="py-20">
         <div class="container">
-            <div class="mx-auto max-w-xl text-center">
+            <div class="mx-auto max-w-xl text-center" data-aos="fade-up">
                 <span class="section-eyebrow">Take A Look</span>
                 <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">Life Inside the Studio</h2>
                 <p class="mt-4 text-sm leading-relaxed text-brand-ink/65">
@@ -152,16 +145,17 @@
                 </p>
             </div>
 
-            <div class="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                <img src="https://placehold.co/400x500/8E1C54/FFFFFF?text=Studio"
-                     alt="Studio space" class="h-full w-full rounded-2xl object-cover shadow-sm">
-                <img src="https://placehold.co/400x500/3E5868/FFFFFF?text=Zumba"
-                     alt="Zumba class in session" class="h-full w-full rounded-2xl object-cover shadow-sm">
-                <img src="https://placehold.co/400x500/3E5868/FFFFFF?text=Yoga"
-                     alt="Yoga class in session" class="h-full w-full rounded-2xl object-cover shadow-sm">
-                <img src="https://placehold.co/400x500/8E1C54/FFFFFF?text=Community"
-                     alt="Studio community" class="h-full w-full rounded-2xl object-cover shadow-sm">
-            </div>
+            @if ($photos->isNotEmpty())
+                <div class="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
+                    @foreach ($photos as $photo)
+                        <img src="{{ $photo->image ? asset('storage/' . $photo->image) : 'https://placehold.co/400x500/8E1C54/FFFFFF?text=' . urlencode($photo->title ?? 'Elite') }}"
+                             alt="{{ $photo->alt_text ?? $photo->title }}" class="h-full w-full rounded-2xl object-cover shadow-sm"
+                             data-aos="zoom-in" data-aos-delay="{{ $loop->index * 75 }}">
+                    @endforeach
+                </div>
+            @else
+                <p class="mt-14 text-center text-sm text-brand-ink/50">Add photos in the admin panel to showcase them here.</p>
+            @endif
 
             <div class="mt-10 text-center">
                 <a href="{{ route('gallery') }}" class="btn-primary">View Full Gallery</a>

@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\Instructors\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -20,7 +22,6 @@ class InstructorForm
                     ->schema([
                         FileUpload::make('image')
                             ->image()
-                            ->directory('instructors')
                             ->imageEditor()
                             ->imageEditorAspectRatios(['1:1'])
                             ->columnSpanFull(),
@@ -43,6 +44,42 @@ class InstructorForm
                             ->columnSpanFull(),
                     ])
                     ->columns(2),
+
+                Section::make('Social Links')
+                    ->description('Add Facebook, Instagram, or any other profile links for this instructor.')
+                    ->schema([
+                        Repeater::make('socials')
+                            ->relationship()
+                            ->schema([
+                                Select::make('platform')
+                                    ->options([
+                                        'facebook' => 'Facebook',
+                                        'instagram' => 'Instagram',
+                                        'youtube' => 'YouTube',
+                                        'tiktok' => 'TikTok',
+                                        'whatsapp' => 'WhatsApp',
+                                        'twitter' => 'Twitter / X',
+                                        'linkedin' => 'LinkedIn',
+                                        'website' => 'Website',
+                                    ])
+                                    ->required()
+                                    ->native(false)
+                                    ->searchable(),
+
+                                TextInput::make('url')
+                                    ->label('Profile URL')
+                                    ->url()
+                                    ->required()
+                                    ->maxLength(255),
+                            ])
+                            ->columns(2)
+                            ->orderColumn('sort_order')
+                            ->addActionLabel('Add Social Link')
+                            ->itemLabel(fn (array $state): ?string => $state['platform'] ?? null)
+                            ->collapsible()
+                            ->defaultItems(0)
+                            ->columnSpanFull(),
+                    ]),
 
                 Section::make('Display Settings')
                     ->schema([

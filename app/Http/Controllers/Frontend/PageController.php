@@ -12,6 +12,7 @@ use App\Models\Service;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Sudam\SudamSweetAlert\Facades\SudamSweetAlert;
 
 class PageController extends Controller
 {
@@ -35,7 +36,21 @@ class PageController extends Controller
 
     public function about(): View
     {
-        return view('Frontend.about');
+        $services = Service::where('is_active', true)
+            ->orderBy('sort_order')
+            ->take(2)
+            ->get();
+
+        $leadInstructor = Instructor::where('is_active', true)
+            ->orderBy('sort_order')
+            ->first();
+
+        $photos = Gallery::where('is_active', true)
+            ->orderBy('sort_order')
+            ->take(4)
+            ->get();
+
+        return view('Frontend.about', compact('services', 'leadInstructor', 'photos'));
     }
 
     public function services(): View
@@ -88,7 +103,7 @@ class PageController extends Controller
         ]);
 
         Contact::create($validated);
-
+        SudamSweetAlert::toast('success', 'Form Submitted Sucessfully!');
         return redirect()
             ->route('contact')
             ->with('success', 'Thanks for reaching out! We\'ll get back to you soon.');

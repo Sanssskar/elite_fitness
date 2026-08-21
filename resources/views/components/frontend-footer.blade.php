@@ -1,6 +1,6 @@
 <footer class="bg-brand-teal-dark text-white">
     <div class="container py-16">
-        <div class="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
+        <div class="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]" data-aos="fade-up">
 
             {{-- Brand --}}
             <div>

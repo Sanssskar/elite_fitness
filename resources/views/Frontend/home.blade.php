@@ -1,4 +1,4 @@
-<x-frontend-layout :title="'Elite Fitness Studio | Zumba & Yoga in Dharan'" :description="'Elite Fitness Studio offers Zumba and Yoga classes for every level. Book your first class free and start moving with us today.'">
+<x-frontend-layout :title="'Elite Fitness Studio | Zumba & Yoga in Dharan'" :description="'Elite Fitness Studio offers Zumba and Yoga classes for every level. Book your class and start moving with us today.'">
 
     {{-- HERO CAROUSEL (full viewport height, sits behind the fixed header) --}}
     <section class="relative overflow-hidden bg-brand-teal-dark bleed-under-header" id="heroCarousel">
@@ -9,7 +9,7 @@
                         <img src="{{ asset(Storage::url($slide->image)) }}" alt="{{ $slide->title }}" class="absolute inset-0 z-0 h-full w-full object-cover">
                         <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/70 via-black/40 to-black/10"></div>
                         <div class="container relative z-20 flex h-full items-center">
-                            <div class="max-w-xl">
+                            <div class="max-w-xl" data-aos="fade-up">
                                 @if ($slide->eyebrow)
                                     <span class="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.25em] text-white/80">{{ $slide->eyebrow }}</span>
                                 @endif
@@ -19,7 +19,7 @@
                                 @endif
                                 {{-- Same two CTAs on every slide — not editable per slide from the admin --}}
                                 <div class="mt-8 flex flex-wrap items-center gap-4">
-                                    <a href="{{ route('contact') }}" class="btn-primary">Book a Free Class</a>
+                                    <a href="{{ route('contact') }}" class="btn-primary">Reserve Your Spot</a>
                                     <a href="{{ route('services') }}" class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/70 px-7 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-white hover:text-brand-ink">View Schedule</a>
                                 </div>
                             </div>
@@ -49,10 +49,10 @@
         @else
             {{-- Fallback when no hero slides exist yet in the admin --}}
             <div class="relative flex h-screen min-h-[420px] items-center justify-center">
-                <div class="container text-center">
+                <div class="container text-center" data-aos="fade-up">
                     <h1 class="font-display text-4xl font-bold text-white sm:text-5xl">Move With Strength. Breathe With Ease.</h1>
                     <p class="mx-auto mt-5 max-w-md text-sm text-white/80">Add hero slides in the admin panel to customize this banner.</p>
-                    <a href="{{ route('contact') }}" class="btn-primary mt-8 inline-flex">Book a Free Class</a>
+                    <a href="{{ route('contact') }}" class="btn-primary mt-8 inline-flex">Book a Session</a>
                 </div>
             </div>
         @endif
@@ -113,7 +113,7 @@
     {{-- SERVICES PREVIEW --}}
     <section class="py-20">
         <div class="container">
-            <div class="mx-auto max-w-xl text-center">
+            <div class="mx-auto max-w-xl text-center" data-aos="fade-up">
                 <span class="section-eyebrow">What We Offer</span>
                 <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">Two Practices, One Goal &mdash; A Stronger You</h2>
             </div>
@@ -121,7 +121,7 @@
             @if ($services->isNotEmpty())
                 <div class="mt-14 grid gap-8 md:grid-cols-2">
                     @foreach ($services as $service)
-                        <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-lg">
+                        <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-lg" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                             <div class="overflow-hidden">
                                 <img src="{{ $service->image ? asset('storage/' . $service->image) : 'https://placehold.co/700x420/8E1C54/FFFFFF?text=' . urlencode($service->title) }}"
                                      alt="{{ $service->title }}"
@@ -149,7 +149,7 @@
     {{-- WHY CHOOSE US --}}
     <section class="bg-brand-teal-light py-20">
         <div class="container">
-            <div class="mx-auto max-w-xl text-center">
+            <div class="mx-auto max-w-xl text-center" data-aos="fade-up">
                 <span class="section-eyebrow">Why Elite</span>
                 <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">Built Around You</h2>
             </div>
@@ -165,7 +165,7 @@
                     ];
                 @endphp
                 @foreach ($features as $feature)
-                    <div class="rounded-2xl bg-white p-7 shadow-sm ring-1 ring-black/5">
+                    <div class="rounded-2xl bg-white p-7 shadow-sm ring-1 ring-black/5" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-wine/10 text-brand-wine">
                             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                         </div>
@@ -182,8 +182,8 @@
         <div class="container grid items-center gap-12 lg:grid-cols-2">
             <img src="{{ $leadInstructor && $leadInstructor->image ? asset('storage/' . $leadInstructor->image) : 'https://placehold.co/640x520/3E5868/FFFFFF?text=Meet+Our+Instructors' }}"
                  alt="Elite Fitness Studio instructors"
-                 class="rounded-2xl object-cover shadow-sm">
-            <div>
+                 class="rounded-2xl object-cover shadow-sm" data-aos="fade-right">
+            <div data-aos="fade-left">
                 <span class="section-eyebrow">Meet The Team</span>
                 <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">Guided by Certified, Caring Instructors</h2>
                 <p class="mt-5 text-sm leading-relaxed text-brand-ink/70">
@@ -198,7 +198,7 @@
     {{-- TESTIMONIALS --}}
     <section class="bg-brand-teal-light py-20">
         <div class="container">
-            <div class="mx-auto max-w-xl text-center">
+            <div class="mx-auto max-w-xl text-center" data-aos="fade-up">
                 <span class="section-eyebrow">Member Stories</span>
                 <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">Loved By Our Community</h2>
             </div>
@@ -213,7 +213,7 @@
                     ];
                 @endphp
                 @foreach ($testimonials as $t)
-                    <div class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-black/5">
+                    <div class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-black/5" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="flex gap-1 text-brand-wine">
                             @for ($i = 0; $i < 5; $i++)
                                 <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
@@ -238,14 +238,14 @@
     {{-- CTA --}}
     <section class="py-20">
         <div class="container">
-            <div class="relative overflow-hidden rounded-[2rem] bg-brand-wine px-8 py-14 text-center sm:px-16">
+            <div class="relative overflow-hidden rounded-[2rem] bg-brand-wine px-8 py-14 text-center sm:px-16" data-aos="zoom-in">
                 <div class="pointer-events-none absolute -left-10 -top-10 h-52 w-52 rounded-full bg-white/10"></div>
                 <div class="pointer-events-none absolute -bottom-14 -right-10 h-60 w-60 rounded-full bg-white/10"></div>
-                <h2 class="font-display text-3xl font-bold text-white sm:text-4xl">Your First Class Is On Us</h2>
+                <h2 class="font-display text-3xl font-bold text-white sm:text-4xl">Ready to Get Moving?</h2>
                 <p class="mx-auto mt-4 max-w-md text-sm text-white/80">
-                    Come see why members stay. Reserve your complimentary Zumba or Yoga session today.
+                    Come see why members stay. Reserve your Zumba or Yoga session today.
                 </p>
-                <a href="{{ route('contact') }}" class="btn-primary mt-8 !bg-white !text-brand-wine hover:!bg-brand-teal hover:!text-white">Book Your Free Class</a>
+                <a href="{{ route('contact') }}" class="btn-primary mt-8 !bg-white !text-brand-wine hover:!bg-brand-teal hover:!text-white">Schedule a Class</a>
             </div>
         </div>
     </section>

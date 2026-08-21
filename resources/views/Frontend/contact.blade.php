@@ -10,7 +10,7 @@
             {{-- FORM + MAP --}}
             <div class="grid gap-10 lg:grid-cols-2">
                 {{-- Form (submits to the contacts table) --}}
-                <div class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-black/5">
+                <div class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-black/5" data-aos="fade-right">
                     <h3 class="font-display text-xl font-bold text-brand-ink">Send Us a Message</h3>
                     <p class="mt-2 text-sm text-brand-ink/60">We'll get back to you as soon as we can.</p>
 
@@ -79,7 +79,7 @@
                 </div>
 
                 {{-- Map (responsive — fills the card, no fixed pixel size) --}}
-                <div class="h-full min-h-[420px] overflow-hidden rounded-2xl shadow-sm ring-1 ring-black/5">
+                <div class="h-full min-h-[420px] overflow-hidden rounded-2xl shadow-sm ring-1 ring-black/5" data-aos="fade-left">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d222.56279015630642!2d87.28227637556975!3d26.807980805490452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ef41e0470c810f%3A0xa786999eae87f16d!2sBartang%20Khim!5e0!3m2!1sen!2sus!4v1787225914567!5m2!1sen!2sus"
                         class="h-full w-full min-h-[420px]" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -97,7 +97,7 @@ $infoCards = [
                     ];
                 @endphp
                 @foreach ($infoCards as $card)
-                    <div class="rounded-2xl bg-white p-7 shadow-sm ring-1 ring-black/5">
+                    <div class="rounded-2xl bg-white p-7 shadow-sm ring-1 ring-black/5" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div
                             class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-wine/10 text-brand-wine">
                             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"

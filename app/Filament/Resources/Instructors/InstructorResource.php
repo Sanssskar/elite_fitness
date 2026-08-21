@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Instructors;
 use App\Filament\Resources\Instructors\Pages\CreateInstructor;
 use App\Filament\Resources\Instructors\Pages\EditInstructor;
 use App\Filament\Resources\Instructors\Pages\ListInstructors;
-use App\Filament\Resources\Instructors\RelationManagers\InstructorSocialsRelationManager;
 use App\Filament\Resources\Instructors\Schemas\InstructorForm;
 use App\Filament\Resources\Instructors\Tables\InstructorsTable;
 use App\Models\Instructor;
@@ -36,13 +35,6 @@ class InstructorResource extends Resource
     public static function table(Table $table): Table
     {
         return InstructorsTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            InstructorSocialsRelationManager::class,
-        ];
     }
 
     public static function getPages(): array

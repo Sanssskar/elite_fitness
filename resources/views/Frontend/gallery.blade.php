@@ -8,7 +8,7 @@
         <div class="container">
             @if ($photos->isNotEmpty())
                 @if ($categories->count() > 1)
-                    <div class="mb-10 flex flex-wrap justify-center gap-2" id="galleryFilters">
+                    <div class="mb-10 flex flex-wrap justify-center gap-2" id="galleryFilters" data-aos="fade-up">
                         <button type="button" data-filter="all" class="gallery-filter-btn is-active rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wide transition">All</button>
                         @foreach ($categories as $category)
                             <button type="button" data-filter="{{ $category }}" class="gallery-filter-btn rounded-full px-5 py-2 text-xs font-semibold uppercase tracking-wide transition">{{ $category }}</button>
@@ -21,7 +21,8 @@
                         <button type="button"
                                 class="gallery-item block w-full overflow-hidden"
                                 data-category="{{ $photo->category }}"
-                                data-full="{{ asset('storage/' . $photo->image) }}" data-alt="{{ $photo->alt_text ?? $photo->title }}">
+                                data-full="{{ asset('storage/' . $photo->image) }}" data-alt="{{ $photo->alt_text ?? $photo->title }}"
+                                data-aos="fade-up" data-aos-delay="{{ ($loop->index % 6) * 75 }}">
                             <img src="{{ asset('storage/' . $photo->image) }}" alt="{{ $photo->alt_text ?? $photo->title }}" loading="lazy" class="block w-full h-auto align-bottom">
                         </button>
                     @endforeach

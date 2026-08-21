@@ -12,13 +12,13 @@
     <div class="absolute inset-0 bg-brand-teal-dark/70"></div>
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-teal-dark/90 via-transparent to-brand-teal-dark/40"></div>
 
-    <div class="container relative text-center">
+    <div class="container relative text-center" data-aos="fade-up">
         @if ($eyebrow)
             <span class="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.25em] text-white/80">{{ $eyebrow }}</span>
         @endif
         <h1 class="font-display text-4xl font-bold text-white drop-shadow-sm sm:text-5xl">{{ $title }}</h1>
         @if ($subtitle)
-            <p class="mx-auto mt-4 max-w-xl text-sm text-white/85 sm:text-base">{{ $subtitle }}</p>
+            <p class="mx-auto mt-4 max-w-xl text-sm text-white/85 sm:text-base" data-aos="fade-up" data-aos-delay="100">{{ $subtitle }}</p>
         @endif
     </div>
 </section>

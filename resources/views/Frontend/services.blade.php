@@ -7,7 +7,7 @@
     @forelse ($services as $service)
         <section class="py-20 {{ $loop->even ? 'bg-brand-teal-light' : '' }}">
             <div class="container grid items-center gap-14 lg:grid-cols-2">
-                <div class="{{ $loop->even ? 'order-2 lg:order-2' : 'order-2 lg:order-1' }}">
+                <div class="{{ $loop->even ? 'order-2 lg:order-2' : 'order-2 lg:order-1' }}" data-aos="{{ $loop->even ? 'fade-left' : 'fade-right' }}">
                     <span class="section-eyebrow">Service {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                     <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">{{ $service->title }}</h2>
                     @if ($service->description)
@@ -29,7 +29,8 @@
                 </div>
                 <img src="{{ $service->image ? asset('storage/' . $service->image) : 'https://placehold.co/640x560/8E1C54/FFFFFF?text=' . urlencode($service->title) }}"
                      alt="{{ $service->title }}"
-                     class="{{ $loop->even ? 'order-1 lg:order-1' : 'order-1 lg:order-2' }} rounded-2xl object-cover shadow-sm">
+                     class="{{ $loop->even ? 'order-1 lg:order-1' : 'order-1 lg:order-2' }} rounded-2xl object-cover shadow-sm"
+                     data-aos="{{ $loop->even ? 'fade-right' : 'fade-left' }}">
             </div>
         </section>
     @empty
@@ -43,7 +44,7 @@
     {{-- PRICING --}}
     <section class="py-20">
         <div class="container">
-            <div class="mx-auto max-w-xl text-center">
+            <div class="mx-auto max-w-xl text-center" data-aos="fade-up">
                 <span class="section-eyebrow">Membership</span>
                 <h2 class="font-display text-3xl font-bold text-brand-ink sm:text-4xl">Simple, Flexible Pricing</h2>
             </div>
@@ -51,7 +52,7 @@
             @if ($pricingPlans->isNotEmpty())
                 <div class="mt-14 grid gap-8 md:grid-cols-3">
                     @foreach ($pricingPlans as $plan)
-                        <div class="relative rounded-2xl p-8 shadow-sm ring-1 {{ $plan->is_featured ? 'bg-brand-wine text-white ring-brand-wine scale-[1.02]' : 'bg-white text-brand-ink ring-black/5' }}">
+                        <div class="relative rounded-2xl p-8 shadow-sm ring-1 {{ $plan->is_featured ? 'bg-brand-wine text-white ring-brand-wine scale-[1.02]' : 'bg-white text-brand-ink ring-black/5' }}" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                             @if ($plan->is_featured)
                                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-teal px-4 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">Most Popular</span>
                             @endif

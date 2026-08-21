@@ -22,7 +22,7 @@
                     @endphp
 
                     @foreach ($instructors as $person)
-                        <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-lg">
+                        <div class="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition hover:shadow-lg" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 100 }}">
                             <div class="overflow-hidden">
                                 <img src="{{ $person->image ? asset('storage/' . $person->image) : 'https://placehold.co/560x600/3E5868/FFFFFF?text=' . urlencode($person->name) }}"
                                      alt="{{ $person->name }}"
@@ -71,14 +71,14 @@
     {{-- CTA --}}
     <section class="pb-20">
         <div class="container">
-            <div class="relative overflow-hidden rounded-[2rem] bg-brand-teal-dark px-8 py-14 text-center sm:px-16">
+            <div class="relative overflow-hidden rounded-[2rem] bg-brand-teal-dark px-8 py-14 text-center sm:px-16" data-aos="zoom-in">
                 <div class="pointer-events-none absolute -left-10 -top-10 h-52 w-52 rounded-full bg-white/10"></div>
                 <div class="pointer-events-none absolute -bottom-14 -right-10 h-60 w-60 rounded-full bg-white/10"></div>
                 <h2 class="font-display text-3xl font-bold text-white sm:text-4xl">Train With an Instructor Who Gets You</h2>
                 <p class="mx-auto mt-4 max-w-md text-sm text-white/80">
                     Book a class and meet the team in person — every instructor is happy to help you find the right fit.
                 </p>
-                <a href="{{ route('contact') }}" class="btn-primary mt-8">Book a Class</a>
+                <a href="{{ route('contact') }}" class="btn-primary mt-8">Join a Class</a>
             </div>
         </div>
     </section>
